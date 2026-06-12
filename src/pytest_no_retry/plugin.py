@@ -67,7 +67,13 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
     if reruns_cli not in (None, 0, "0"):
         _fail(config, f"--reruns={reruns_cli} on the command line")
 
-    reruns_ini = config.getini("reruns") if "reruns" in config._parser._inicache else None
+    # `reruns` ini-option only exists when pytest-rerunfailures is installed.
+    # Ask pytest directly and swallow the lookup error if it isn't registered —
+    # never touch private parser internals, they move between pytest versions.
+    try:
+        reruns_ini = config.getini("reruns")
+    except (ValueError, KeyError):
+        reruns_ini = None
     if reruns_ini not in (None, "", 0, "0"):
         _fail(config, f"reruns={reruns_ini} in pytest.ini / pyproject.toml")
 

@@ -8,10 +8,11 @@ version = "0.1.0"
 description = "A pytest plugin that refuses to let your suite hide flakes behind retries."
 readme = "README.md"
 license = { text = "MIT" }
-authors = [{ name = "Alex Shabunin", email = "shanaleks0007@gmail.com" }]
+authors = [{ name = "Alex Shabunin" }]
 keywords = ["pytest", "qa", "flaky", "testing", "discipline"]
 requires-python = ">=3.10"
 dependencies = ["pytest>=7"]
+optional-dependencies = { test = ["pytest-rerunfailures>=12"] }
 classifiers = [
     "Framework :: Pytest",
     "License :: OSI Approved :: MIT License",

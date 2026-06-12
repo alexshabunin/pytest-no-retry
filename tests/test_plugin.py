@@ -16,7 +16,7 @@ def test_clean_session_runs_normally(pytester: pytest.Pytester) -> None:
             assert 1 + 1 == 2
         """
     )
-    result = pytester.runpytest("-p", "pytest_no_retry.plugin")
+    result = pytester.runpytest()
     assert result.ret == 0
 
 
@@ -27,7 +27,7 @@ def test_reruns_cli_aborts_session(pytester: pytest.Pytester) -> None:
             assert True
         """
     )
-    result = pytester.runpytest("-p", "pytest_no_retry.plugin", "--reruns=2")
+    result = pytester.runpytest("--reruns=2")
     assert result.ret != 0
     # the plugin's banner is in stdout/stderr
     combined = "\n".join(result.outlines + result.errlines)
@@ -44,7 +44,7 @@ def test_flaky_marker_with_reruns_aborts(pytester: pytest.Pytester) -> None:
             assert True
         """
     )
-    result = pytester.runpytest("-p", "pytest_no_retry.plugin")
+    result = pytester.runpytest()
     assert result.ret != 0
 
 
@@ -59,7 +59,7 @@ def test_allow_retry_marker_with_reason_passes(pytester: pytest.Pytester) -> Non
             assert True
         """
     )
-    result = pytester.runpytest("-p", "pytest_no_retry.plugin")
+    result = pytester.runpytest()
     assert result.ret == 0
 
 
@@ -74,7 +74,7 @@ def test_allow_retry_without_reason_aborts(pytester: pytest.Pytester) -> None:
             assert True
         """
     )
-    result = pytester.runpytest("-p", "pytest_no_retry.plugin")
+    result = pytester.runpytest()
     assert result.ret != 0
 
 
@@ -88,7 +88,7 @@ def test_global_escape_hatch(pytester: pytest.Pytester) -> None:
             assert True
         """
     )
-    result = pytester.runpytest("-p", "pytest_no_retry.plugin", "--allow-retry")
+    result = pytester.runpytest("--allow-retry")
     assert result.ret == 0
 
 
@@ -103,5 +103,5 @@ def test_soak_marker_is_skipped(pytester: pytest.Pytester) -> None:
             assert True
         """
     )
-    result = pytester.runpytest("-p", "pytest_no_retry.plugin")
+    result = pytester.runpytest()
     assert result.ret == 0

@@ -1,9 +1,15 @@
 # pytest-no-retry
 
+[![ci](https://github.com/alexshabunin/pytest-no-retry/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/alexshabunin/pytest-no-retry/actions/workflows/ci.yml)
+&nbsp;
+[![python](https://img.shields.io/badge/python-3.10%2B-171717?style=flat-square&labelColor=171717)](https://github.com/alexshabunin/pytest-no-retry)
+&nbsp;
+[![license](https://img.shields.io/badge/license-MIT-171717?style=flat-square&labelColor=171717)](LICENSE)
+
 Stops your pytest session if it's about to rerun failed tests.
 
 ```bash
-pip install pytest-no-retry
+pip install git+https://github.com/alexshabunin/pytest-no-retry
 ```
 
 Aborts the session if it sees any of:
@@ -61,10 +67,11 @@ pytest --allow-retry
 ## install
 
 ```bash
-pip install pytest-no-retry
+pip install git+https://github.com/alexshabunin/pytest-no-retry
 ```
 
-Auto-registers via the `pytest11` entry point.
+Auto-registers via the `pytest11` entry point. (Not on PyPI yet — install
+straight from the repo.)
 
 ## origin
 
